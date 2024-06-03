@@ -32,14 +32,14 @@ const FormContext = ({ children }: Props) => {
       _type: 'number',
       _placeholder: 'enter a number',
       _label: 'Test',
-      _name: '',
+      _name: 'Test 1',
     },
     {
       id: '532322352365363',
       _type: 'number',
       _placeholder: 'enter a number 2',
       _label: 'Test 2',
-      _name: '',
+      _name: 'Test 2',
     },
   ]);
 

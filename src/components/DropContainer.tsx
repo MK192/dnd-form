@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { Dispatch, useContext } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 
 // context
@@ -7,6 +7,9 @@ import { FormInputContext } from '../context/FormInputsContext';
 // components
 import DropedItem from './DropedItem';
 
+type Props = {
+  setIsInputEdit: Dispatch<React.SetStateAction<boolean>>;
+};
 export default function DropContainer() {
   const { formInputs, setFormInputs } = useContext(FormInputContext);
   const { setNodeRef } = useDroppable({

@@ -31,11 +31,12 @@ export default function DropedItem({
     transition,
     transform: CSS.Transform.toString(transform),
   };
-
+  const ItemPosition = index + 1;
+  console.log(dropedItem);
   return (
     <div className="relative">
       <div
-        className="h-[150px] bg-white rounded-sm  mb-4 cursor-grabbing"
+        className="bg-white rounded-sm  mb-4 cursor-grabbing border-[1px] border-gray-300"
         key={index}
         ref={setNodeRef}
         {...attributes}
@@ -43,11 +44,19 @@ export default function DropedItem({
         style={style}
       >
         <p className="absolute top-0 left-5 bg-black text-white w-10 rounded">
-          {index + 1}
+          {ItemPosition}
         </p>
 
         <div className="flex flex-col pt-8 items-start p-4">
           <p className="text-gray-500">{`<${dropedItem._type}/>`}</p>
+          {dropedItem._name ? null : (
+            <div className="my-1 text-red-500 flex items-center gap-3">
+              <p className=" text-red-500 border-[1px] border-red-500 rounded-[50%] w-5 text-xs">
+                !
+              </p>
+              <p>Name is Required</p>
+            </div>
+          )}
           <p>{dropedItem._label}</p>
           <div className="border-[1px] w-full h-[40px] border-gray-300 text-left p-2">
             <p className="text-gray-400">{dropedItem._placeholder}</p>
