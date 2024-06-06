@@ -4,18 +4,19 @@ import { useContext } from 'react';
 // context
 import { FormInputContext } from '../context/FormInputsContext';
 
+// components
+import { Button } from './Buttons';
+
 type Props = {
   type: string;
-  name: string;
+  label: string;
   placeholder: string;
-  label?: string;
 };
 
-export default function FormInput({
+export default function FormDraggableInput({
   type,
-  name,
+  label,
   placeholder,
-  label = '',
 }: Props) {
   const { setFormInputs } = useContext(FormInputContext);
 
@@ -29,37 +30,39 @@ export default function FormInput({
     : undefined;
 
   return (
-    <div
-      className="border-2 border-gray w-[150px] h-[150px] flex flex-col cursor-grabbing"
-      ref={setNodeRef}
-      style={style}
-      {...listeners}
-      {...attributes}
-    >
-      <button
-        className="self-end w-[30px] bg-slate-400 mb-[30px] z-20"
-        onMouseDown={(e) => {
-          e.stopPropagation();
+    <div className="relative z-50">
+      <div
+        className="border-2 border-gray w-[150px] h-[150px] flex flex-col cursor-grabbing"
+        ref={setNodeRef}
+        style={style}
+        {...listeners}
+        {...attributes}
+      >
+        <div className="flex flex-col justify-start items-start p-2 mt-10">
+          {label}
+          <div className="p-2 border-2 border-gray w-full text-left">
+            <p className="text-gray-500">{placeholder} </p>
+          </div>
+        </div>
+      </div>
+      <Button
+        rest="self-end absolute top-0 right-0"
+        dropVersion={false}
+        handleClick={() =>
           setFormInputs((prev) => [
             ...prev,
             {
               id: Date.now().toString(),
               _type: type,
-              _name: name,
-              _placeholder: placeholder,
-              _label: label,
+              _name: '',
+              _placeholder: '',
+              _label: '',
             },
-          ]);
-        }}
+          ])
+        }
       >
         +
-      </button>
-      <div className="flex flex-col justify-start items-start p-2">
-        {name}
-        <div className="p-2 border-2 border-gray w-full text-left">
-          <p className="text-gray-500">{placeholder} </p>
-        </div>
-      </div>
+      </Button>
     </div>
   );
 }

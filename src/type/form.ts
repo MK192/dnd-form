@@ -5,3 +5,10 @@ export interface FormInputType {
   _placeholder: string;
   _label: string;
 }
+
+export interface EditInputType {
+  type: string;
+  name: string;
+  placeholder: string;
+  label: string;
+}
