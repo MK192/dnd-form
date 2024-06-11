@@ -10,12 +10,12 @@ import {
 // components
 import DropContainer from './DropContainer';
 import InputList from './InputList';
-import EditInput from './EditInput';
+import EditInputContainer from './EditInputContainer';
 
 // context
 import { FormInputContext } from '../context/FormInputsContext';
 
-// utils
+// functions
 import { handleDragEnd } from '../functions/form';
 
 // type
@@ -33,18 +33,21 @@ export default function MainContainer() {
   const sensors = useSensors(touchSensor, mouseSensor);
 
   return (
-    <div className="bg-white h-full flex">
+    <main className="bg-white h-full flex">
       <DndContext
         sensors={sensors}
         onDragEnd={(e) => handleDragEnd(e, setFormInputs)}
       >
         {editInput ? (
-          <EditInput editInput={editInput} setEditInput={setEditInput} />
+          <EditInputContainer
+            editInput={editInput}
+            setEditInput={setEditInput}
+          />
         ) : (
           <InputList />
         )}
         <DropContainer setEditInput={setEditInput} />
       </DndContext>
-    </div>
+    </main>
   );
 }

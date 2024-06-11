@@ -9,7 +9,7 @@ import { Button } from './Buttons';
 // type
 import { FormInputType } from '../type/form';
 
-// utils
+// functions
 import { removeInput, swapInputs } from '../functions/form';
 
 type Props = {
@@ -34,9 +34,9 @@ export default function DropedItem({
     });
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<HTMLInputElement | null>(null);
   const checkOutsideClick = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target)) {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
       setShowInput(false);
     }
   };

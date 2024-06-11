@@ -16,7 +16,7 @@ export default function Button({
   children,
 }: Props) {
   const dropButtonStyle = `bg-slate-100 w-8 cursor-pointer border-[1px] border-gray-300 ${rest} flex justify-center items-center`;
-  const addDragButtonStyle = `w-[30px] bg-slate-400 ${rest} flex justify-center items-center`;
+  const addDragButtonStyle = `w-8 bg-slate-400 ${rest} flex justify-center items-center`;
   const version = dropVersion ? dropButtonStyle : addDragButtonStyle;
 
   return (

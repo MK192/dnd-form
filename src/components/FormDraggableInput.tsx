@@ -8,7 +8,7 @@ import { FormInputContext } from '../context/FormInputsContext';
 import { Button } from './Buttons';
 
 type Props = {
-  type: string;
+  type: 'radio' | 'text' | 'number';
   label: string;
   placeholder: string;
 };
@@ -19,10 +19,12 @@ export default function FormDraggableInput({
   placeholder,
 }: Props) {
   const { setFormInputs } = useContext(FormInputContext);
-
+  const addPlaceholder = type === 'radio' ? 'Option' : ' ';
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: `draggable-${type}}`,
-    data: [{ _type: type, _name: '', _placeholder: '', _label: '' }],
+    data: [
+      { _type: type, _name: '', _placeholder: addPlaceholder, _label: '' },
+    ],
   });
 
   const style = transform
@@ -55,7 +57,7 @@ export default function FormDraggableInput({
               id: Date.now().toString(),
               _type: type,
               _name: '',
-              _placeholder: '',
+              _placeholder: addPlaceholder,
               _label: '',
             },
           ])

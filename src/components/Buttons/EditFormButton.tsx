@@ -8,7 +8,7 @@ type Props = {
   type?: 'submit' | 'button';
 };
 
-export default function FormButton({
+export default function EditFormButton({
   buttonColor = 'bg-black',
   textColor = 'text-white',
   children,
@@ -18,7 +18,7 @@ export default function FormButton({
   return (
     <button
       type={type}
-      className={`rounded w-20 p-2 ${buttonColor} ${textColor}`}
+      className={`rounded w-24 p-2 ${buttonColor} ${textColor} `}
       onClick={handleClick}
     >
       {children}

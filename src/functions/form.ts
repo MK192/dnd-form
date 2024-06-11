@@ -72,7 +72,11 @@ export const handleDragEnd = (
 };
 
 /* function to change place of 2 dropped items. Function activate
-when user enter value in input field and click somewhere else.*/
+when user enter value in input field and click somewhere else.
+@params
+inputIndex, swapInputIndex - index-es of inputs that should swap places
+array - array of inputs 
+*/
 export const swapInputs = (
   inputIndex: number,
   swapInputIndex: number,
@@ -84,5 +88,26 @@ export const swapInputs = (
     array[swapInputIndex] = prom;
   }
 
+  return array;
+};
+
+export const editFormInput = (
+  inputId: string,
+  formValues: FormInputType,
+  array: FormInputType[]
+) => {
+  const index = array.findIndex((element) => element.id === inputId);
+  const { _type, _name, _label, _placeholder, _radioOptions } = formValues;
+
+  const editedElement = <FormInputType>{
+    id: inputId,
+    _type: _type,
+    _name: _name,
+    _label: _label,
+    _placeholder: _placeholder,
+  };
+  if (_radioOptions) editedElement._radioOptions = _radioOptions;
+
+  array.splice(index, 1, editedElement);
   return array;
 };

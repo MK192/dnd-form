@@ -1,4 +1,4 @@
-import { Dispatch, useContext } from 'react';
+import { Dispatch, useContext, useEffect } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 
@@ -20,12 +20,16 @@ export default function DropContainer({ setEditInput }: Props) {
     id: 'droppable',
   });
 
+  useEffect(() => {
+    setEditInput(null);
+  }, [formInputs, setEditInput]);
+
   return (
     <div
       className="bg-slate-100 w-[65%] border-4 border-blue-100 p-4 z-20"
       ref={setNodeRef}
     >
-      <h1 className="mb-9">Drop Container</h1>
+      <h2 className="mb-9">Drop Container</h2>
       <SortableContext items={formInputs}>
         {formInputs.map((item, index) => (
           <DropedItem
