@@ -4,25 +4,26 @@ import { useContext } from 'react';
 // context
 import { FormInputContext } from '../context/FormInputsContext';
 
+// components
+import { Button } from './Buttons';
+
 type Props = {
-  type: string;
-  name: string;
+  type: 'radio' | 'text' | 'number';
+  label: string;
   placeholder: string;
-  label?: string;
 };
 
-export default function FormInput({
+export default function FormDraggableInput({
   type,
-  name,
+  label,
   placeholder,
-  label = '',
 }: Props) {
   const { setFormInputs } = useContext(FormInputContext);
-
+  const addPlaceholder = type === 'radio' ? 'Option' : ' ';
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: `draggable-${type}}`,
     data: [
-      { _type: type, _name: name, _placeholder: placeholder, _label: label },
+      { _type: type, _name: '', _placeholder: addPlaceholder, _label: '' },
     ],
   });
 
@@ -31,7 +32,7 @@ export default function FormInput({
     : undefined;
 
   return (
-    <div>
+    <div className="relative z-50">
       <div
         className="border-2 border-gray w-[150px] h-[150px] flex flex-col cursor-grabbing"
         ref={setNodeRef}
@@ -39,30 +40,31 @@ export default function FormInput({
         {...listeners}
         {...attributes}
       >
-        <button
-          className="self-end w-[30px] bg-slate-400 mb-[30px] z-20"
-          onMouseDown={() =>
-            setFormInputs((prev) => [
-              ...prev,
-              {
-                id: Date.now().toString(),
-                _type: type,
-                _name: name,
-                _placeholder: placeholder,
-                _label: label,
-              },
-            ])
-          }
-        >
-          +
-        </button>
-        <div className="flex flex-col justify-start items-start p-2">
-          {name}
+        <div className="flex flex-col justify-start items-start p-2 mt-10">
+          {label}
           <div className="p-2 border-2 border-gray w-full text-left">
             <p className="text-gray-500">{placeholder} </p>
           </div>
         </div>
       </div>
+      <Button
+        rest="self-end absolute top-0 right-0"
+        dropVersion={false}
+        handleClick={() =>
+          setFormInputs((prev) => [
+            ...prev,
+            {
+              id: Date.now().toString(),
+              _type: type,
+              _name: '',
+              _placeholder: addPlaceholder,
+              _label: '',
+            },
+          ])
+        }
+      >
+        +
+      </Button>
     </div>
   );
 }
@@ -70,3 +72,7 @@ export default function FormInput({
 /* button use onMouseDown event because onClick don't work as
 expected inside div with setNodeRef
 */
+
+/* TODO adding new item on button click activates 2 times.
+Number of items stay same, but from performance view it is 
+not good */
