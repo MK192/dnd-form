@@ -25,8 +25,8 @@ export default function DropContainer({ setEditInput }: Props) {
   }, [formInputs, setEditInput]);
 
   return (
-    <div
-      className="bg-slate-100 w-[65%] border-4 border-blue-100 p-4 z-20"
+    <section
+      className="bg-slate-100 w-[40%] border-2 border-blue-100 p-4 z-20"
       ref={setNodeRef}
     >
       <h2 className="mb-9">Drop Container</h2>
@@ -42,6 +42,6 @@ export default function DropContainer({ setEditInput }: Props) {
           />
         ))}
       </SortableContext>
-    </div>
+    </section>
   );
 }

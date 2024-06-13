@@ -3,22 +3,22 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 //components
-import EditFormButton from '../Buttons/EditFormButton';
-import EditFormInput from './EditFormInput';
+import EditFormButton from '../../Buttons/EditFormButton';
+import EditFormInput from './EditFormText';
 import EditFormSelect from './EditFormSelect';
-import FormOptions from './FormOptions';
+import FormOptions from '../FormOptions';
 
 //context
-import { FormInputContext } from '../../context/FormInputsContext';
+import { FormInputContext } from '../../../context/FormInputsContext';
 
 //schema
-import { inputsEditSchema } from '../../schema/Inputs';
+import { inputsEditSchema } from '../../../schema/Inputs';
 
 //type
-import { FormInputType } from '../../type/form';
+import { FormInputType } from '../../../type/form';
 
 // functions
-import { editFormInput } from '../../functions/form';
+import { editFormInput } from '../../../functions/form';
 
 type Props = {
   editInput: FormInputType;
@@ -49,7 +49,7 @@ export default function EditForm({ editInput, setEditInput }: Props) {
     { value: 'text', name: 'Text' },
     { value: 'number', name: 'Number' },
   ];
-
+  console.log(errors);
   return (
     <form
       className="flex flex-col gap-7 "

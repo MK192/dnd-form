@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 //type
-import { OptionsType } from '../../type/form';
+import { OptionsType } from '../../../type/form';
 
 type Props = {
   labelText: string;

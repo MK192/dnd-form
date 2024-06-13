@@ -22,6 +22,7 @@ export default function FormDraggableInput({
   const addPlaceholder = type === 'radio' ? 'Option' : ' ';
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: `draggable-${type}}`,
+
     data: [
       { _type: type, _name: '', _placeholder: addPlaceholder, _label: '' },
     ],
@@ -32,9 +33,9 @@ export default function FormDraggableInput({
     : undefined;
 
   return (
-    <div className="relative z-50">
+    <div className="relative z-50 ">
       <div
-        className="border-2 border-gray w-[150px] h-[150px] flex flex-col cursor-grabbing"
+        className="shadow-[0px_1px_3px_rgba(0,0,0,0.3)] w-[150px] flex flex-col cursor-grabbing"
         ref={setNodeRef}
         style={style}
         {...listeners}
