@@ -5,7 +5,7 @@ type Props = {
   error?: string;
 };
 
-const EditFormInput = forwardRef<HTMLInputElement, Props>(
+const EditFormText = forwardRef<HTMLInputElement, Props>(
   ({ labelText, error, ...other }: Props, ref) => {
     return (
       <div className="flex flex-col items-start w-full">
@@ -24,4 +24,4 @@ const EditFormInput = forwardRef<HTMLInputElement, Props>(
   }
 );
 
-export default EditFormInput;
+export default EditFormText;

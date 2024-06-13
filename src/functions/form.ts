@@ -3,7 +3,7 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { DragEndEvent } from '@dnd-kit/core';
 
 //type
-import { FormInputType } from '../type/form';
+import { FormInputType, GeneratedFormType } from '../type/form';
 
 /* remove input from droppable container 
 @ params 
@@ -91,6 +91,10 @@ export const swapInputs = (
   return array;
 };
 
+/* this function should edit selected input from drop container 
+@params inputId - id of edited input
+        formValues - values taken from form on submit
+        array - updated array with changes */
 export const editFormInput = (
   inputId: string,
   formValues: FormInputType,
@@ -110,4 +114,29 @@ export const editFormInput = (
 
   array.splice(index, 1, editedElement);
   return array;
+};
+
+/* function activate alert message.If form is successfully submited than values
+should be shown, if name is not provided then alert should be  'All fields should have names'
+@params formValues- values taken from form on submit
+        formInputs - values for inputs like placeholder, name, label ...
+        */
+
+export const generatedFormSubmit = (
+  formValues: GeneratedFormType,
+  formInputs: FormInputType[]
+) => {
+  let message = 'Form submited with values:';
+
+  for (let i = 0; i < formInputs.length; i++) {
+    if (formInputs[i]._name) {
+      message += `\n ${[formInputs[i]._name]}: ${formValues.fields[
+        i
+      ].value.toString()}`;
+    } else {
+      message = 'All fields should have names';
+      break;
+    }
+  }
+  alert(message);
 };

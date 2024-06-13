@@ -9,8 +9,9 @@ import {
 
 // components
 import DropContainer from './DropContainer';
-import InputList from './InputList';
+import InputListContainer from './InputListContainer';
 import EditInputContainer from './EditInputContainer';
+import GeneratedFormContainer from './GeneratedFormContainer';
 
 // context
 import { FormInputContext } from '../context/FormInputsContext';
@@ -24,7 +25,11 @@ import { FormInputType } from '../type/form';
 export default function MainContainer() {
   const [editInput, setEditInput] = useState<FormInputType | null>(null);
   const { setFormInputs } = useContext(FormInputContext);
-  const touchSensor = useSensor(TouchSensor);
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      distance: 10,
+    },
+  });
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10,
@@ -44,10 +49,11 @@ export default function MainContainer() {
             setEditInput={setEditInput}
           />
         ) : (
-          <InputList />
+          <InputListContainer />
         )}
         <DropContainer setEditInput={setEditInput} />
       </DndContext>
+      <GeneratedFormContainer />
     </main>
   );
 }
