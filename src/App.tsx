@@ -1,10 +1,10 @@
 import './App.css';
 
 // components
-import MainContainer from './components/MainContainer';
+import MainContainer from '@components/MainContainer';
 
 // context
-import FormContext from './context/FormInputsContext';
+import FormContext from '@context/FormInputsContext';
 
 function App() {
   return (

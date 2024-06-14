@@ -23,7 +23,7 @@ export default function FormOptions({ control, register, errors }: Props) {
     name: '_radioOptions',
     control,
   });
-  console.log(errors);
+
   return (
     <div className="flex flex-col items-start ">
       <EditFormButton

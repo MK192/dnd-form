@@ -8,19 +8,19 @@ import {
 } from '@dnd-kit/core';
 
 // components
-import DropContainer from './DropContainer';
-import InputListContainer from './InputListContainer';
-import EditInputContainer from './EditInputContainer';
-import GeneratedFormContainer from './GeneratedFormContainer';
+import DropContainer from '@components/DropContainer';
+import InputListContainer from '@components/InputListContainer';
+import EditInputContainer from '@components/EditInputContainer';
+import GeneratedFormContainer from '@components/GeneratedFormContainer';
 
 // context
-import { FormInputContext } from '../context/FormInputsContext';
+import { FormInputContext } from '@context/FormInputsContext';
 
 // functions
-import { handleDragEnd } from '../functions/form';
+import { handleDragEnd } from '@functions/form';
 
 // type
-import { FormInputType } from '../type/form';
+import { FormInputType } from '@type/form';
 
 export default function MainContainer() {
   const [editInput, setEditInput] = useState<FormInputType | null>(null);

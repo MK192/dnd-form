@@ -1,25 +1,26 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 //components
-import EditFormButton from '../../Buttons/EditFormButton';
+import EditFormButton from '@components/Buttons/EditFormButton';
 import GeneratedFormInput from './GeneratedFormInput';
 
-// context
-import { FormInputContext } from '../../../context/FormInputsContext';
+//context
+import { FormInputContext } from '@context/FormInputsContext';
 
 //schema
-import { generatedFormSchema } from '../../../schema/Inputs';
+import { generatedFormSchema } from '@schema/generatedFormSchema';
 
 //type
-import { GeneratedFormType } from '../../../type/form';
+import { GeneratedFormType } from '@type/form';
 
 //functions
-import { generatedFormSubmit } from '../../../functions/form';
+import { generatedFormSubmit } from '@functions/form';
 
 export default function GeneratedForm() {
   const { formInputs } = useContext(FormInputContext);
+
   const {
     register,
     handleSubmit,
@@ -36,7 +37,7 @@ export default function GeneratedForm() {
 
   useEffect(() => {
     reset();
-    formInputs.forEach((input) => {
+    formInputs.forEach(() => {
       append({
         value: '',
       });

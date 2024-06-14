@@ -1,7 +1,10 @@
 import { forwardRef } from 'react';
 
 //type
-import { RadioType } from '../../../type/form';
+import { RadioType } from '@type/form';
+
+// enum
+import { EInputType } from '@enums/inputs';
 
 type Props = {
   error?: string | undefined;
@@ -16,7 +19,7 @@ const GeneratedFormRadio = forwardRef<HTMLInputElement, Props>(
         {_radioOptions?.map((radio) => (
           <div key={radio.value} className="flex items-center gap-1">
             <input
-              type="radio"
+              type={EInputType.RADIO}
               value={radio.value}
               ref={ref}
               {...other}
