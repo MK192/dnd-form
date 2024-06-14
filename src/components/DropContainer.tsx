@@ -2,14 +2,14 @@ import { Dispatch, useContext, useEffect } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 
-// context
-import { FormInputContext } from '../context/FormInputsContext';
-
 // components
-import DropedItem from './DropedItem';
+import DropedItem from '@components/DropedItem';
+
+// context
+import { FormInputContext } from '@context/FormInputsContext';
 
 //type
-import { FormInputType } from '../type/form';
+import { FormInputType } from '@type/form';
 
 type Props = {
   setEditInput: Dispatch<React.SetStateAction<FormInputType | null>>;

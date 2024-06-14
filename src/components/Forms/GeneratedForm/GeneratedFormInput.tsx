@@ -1,11 +1,15 @@
-// components
+import { UseFormRegister } from 'react-hook-form';
+
+//components
 import GeneratedFormText from './GeneratedFormText';
 import GeneratedFormNumber from './GeneratedFormNumber';
 import GeneratedFormRadio from './GeneratedFormRadio';
-import { UseFormRegister } from 'react-hook-form';
 
 //type
-import { RadioType, GeneratedFormType } from '../../../type/form';
+import { RadioType, GeneratedFormType } from '@type/form';
+
+//enum
+import { EInputType } from '@enums/inputs';
 
 type Props = {
   _placeholder: string | undefined;
@@ -27,7 +31,7 @@ const GeneratedFormInput = ({
   register,
 }: Props) => {
   switch (_type) {
-    case 'text':
+    case EInputType.TEXT:
       return (
         <GeneratedFormText
           error={error}
@@ -36,7 +40,7 @@ const GeneratedFormInput = ({
           {...register(`fields.${index}.value` as const)}
         />
       );
-    case 'number':
+    case EInputType.NUMBER:
       return (
         <GeneratedFormNumber
           error={error}

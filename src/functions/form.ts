@@ -3,7 +3,7 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { DragEndEvent } from '@dnd-kit/core';
 
 //type
-import { FormInputType, GeneratedFormType } from '../type/form';
+import { FormInputType, GeneratedFormType } from '@type/form';
 
 /* remove input from droppable container 
 @ params 
@@ -51,24 +51,23 @@ export const handleDragEnd = (
   setFormInputs: Dispatch<React.SetStateAction<FormInputType[] | []>>
 ) => {
   const { active, over } = event;
+  let isItemAdded = false;
 
   if (active?.id === over?.id) {
     return;
   }
-  if (
-    event.active.data.current &&
-    event.active.data.current[0] &&
-    event.over?.id
-  ) {
-    addDraggInput(event.active.data.current[0], setFormInputs);
+  if (active.data.current && active.data.current[0] && over?.id) {
+    addDraggInput(active.data.current[0], setFormInputs);
+    isItemAdded = true;
   }
 
-  setFormInputs((inputs) => {
-    const oldIndex = inputs.findIndex((input) => input?.id === active?.id);
-    const newIndex = inputs.findIndex((input) => input?.id === over?.id);
+  if (isItemAdded || over?.id)
+    setFormInputs((inputs) => {
+      const oldIndex = inputs.findIndex((input) => input?.id === active?.id);
+      const newIndex = inputs.findIndex((input) => input?.id === over?.id);
 
-    return arrayMove(inputs, oldIndex, newIndex);
-  });
+      return arrayMove(inputs, oldIndex, newIndex);
+    });
 };
 
 /* function to change place of 2 dropped items. Function activate
