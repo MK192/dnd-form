@@ -54,6 +54,7 @@ export default function EditForm({ editInput, setEditInput }: Props) {
     { value: 'radio', name: 'Radio' },
     { value: 'text', name: 'Text' },
     { value: 'number', name: 'Number' },
+    { value: 'select', name: 'Select' },
   ];
 
   return (
@@ -81,7 +82,7 @@ export default function EditForm({ editInput, setEditInput }: Props) {
         error={errors._label?.message}
       />
 
-      {newType === EInputType.RADIO ? (
+      {newType === EInputType.RADIO || newType === EInputType.SELECT ? (
         <FormOptions control={control} register={register} errors={errors} />
       ) : (
         <EditFormInput
@@ -90,6 +91,7 @@ export default function EditForm({ editInput, setEditInput }: Props) {
           error={errors._placeholder?.message}
         />
       )}
+
       <div className="flex mt-11  gap-16 justify-center">
         <EditFormButton type="button" handleClick={() => setEditInput(null)}>
           Cancel

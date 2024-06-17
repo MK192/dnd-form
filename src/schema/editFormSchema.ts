@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-const TYPE = ['radio', 'text', 'number', ''] as const;
+const TYPE = ['radio', 'text', 'number', 'select', ''] as const;
 
-const radioOptionsArray = z.object({
+const OptionsArray = z.object({
   value: z
     .string()
     .min(1, { message: `can't be empty` })
@@ -18,14 +18,14 @@ export const editFormSchema = z
       .max(256, { message: `max number of characters is 256` }),
     _label: z.string(),
     _placeholder: z.string(),
-    _radioOptions: z.array(radioOptionsArray).optional(),
+    _options: z.array(OptionsArray).optional(),
   })
   .refine(
     (data) =>
-      data._type !== 'radio' ||
-      (data._radioOptions && data._radioOptions?.length > 1),
+      (data._type !== 'radio' && data._type !== 'select') ||
+      (data._options && data._options?.length > 1),
     {
-      message: 'Radio should have at least 2 options',
-      path: ['_radioOptions'],
+      message: 'Two Options are minimum',
+      path: ['_options'],
     }
   );

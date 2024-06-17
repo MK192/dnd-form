@@ -4,17 +4,17 @@ export interface FormInputType {
   _name: string;
   _placeholder?: string;
   _label: string;
-  _radioOptions?: {
+  _options?: {
     value: string;
   }[];
 }
 
-export interface OptionsType {
+export interface EditOptionsType {
   value: string;
   name: string;
 }
 
-export interface RadioType {
+export interface OptionsType {
   value: string;
 }
 
