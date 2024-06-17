@@ -1,5 +1,8 @@
 import { forwardRef } from 'react';
 
+// enum
+import { EInputType } from '@enums/inputs';
+
 type Props = {
   error?: string | undefined;
   _placeholder: string | undefined;
@@ -14,7 +17,7 @@ const GeneratedFormText = forwardRef<HTMLInputElement, Props>(
           {_label} <span className="text-red-500">{error ? error : null}</span>
         </label>
         <input
-          type="text"
+          type={EInputType.TEXT}
           className="w-full rounded-sm border-[1px] px-2"
           ref={ref}
           {...other}

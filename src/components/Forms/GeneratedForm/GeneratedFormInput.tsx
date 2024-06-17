@@ -1,18 +1,23 @@
-// components
+import { UseFormRegister } from 'react-hook-form';
+
+//components
 import GeneratedFormText from './GeneratedFormText';
 import GeneratedFormNumber from './GeneratedFormNumber';
 import GeneratedFormRadio from './GeneratedFormRadio';
-import { UseFormRegister } from 'react-hook-form';
+import GeneratedFormSelect from './GeneratedFormSelect';
 
 //type
-import { RadioType, GeneratedFormType } from '../../../type/form';
+import { OptionsType, GeneratedFormType } from '@type/form';
+
+//enum
+import { EInputType } from '@enums/inputs';
 
 type Props = {
   _placeholder: string | undefined;
   _type: string;
   _label: string | undefined;
   index: number;
-  _radioOptions?: RadioType[] | undefined;
+  _options?: OptionsType[] | undefined;
   error?: string | undefined;
   register: UseFormRegister<GeneratedFormType>;
 };
@@ -22,12 +27,12 @@ const GeneratedFormInput = ({
   _type,
   _label,
   index,
-  _radioOptions,
+  _options,
   error,
   register,
 }: Props) => {
   switch (_type) {
-    case 'text':
+    case EInputType.TEXT:
       return (
         <GeneratedFormText
           error={error}
@@ -36,7 +41,7 @@ const GeneratedFormInput = ({
           {...register(`fields.${index}.value` as const)}
         />
       );
-    case 'number':
+    case EInputType.NUMBER:
       return (
         <GeneratedFormNumber
           error={error}
@@ -47,11 +52,20 @@ const GeneratedFormInput = ({
           })}
         />
       );
-
+    case EInputType.SELECT:
+      return (
+        <GeneratedFormSelect
+          error={error}
+          _options={_options}
+          _label={_label}
+          {...register(`fields.${index}.value` as const)}
+        />
+      );
     default:
       return (
         <GeneratedFormRadio
-          _radioOptions={_radioOptions}
+          _options={_options}
+          _label={_label}
           error={error}
           {...register(`fields.${index}.value` as const)}
         />

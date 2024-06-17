@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 // type
-import { GeneratedFormType } from '../type/form';
+import { GeneratedFormType } from '@type/form';
 
 interface IGeneratedFormContext {
   formFields: [] | GeneratedFormType[];

@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 // type
-import { FormInputType } from '../type/form';
+import { FormInputType } from '@type/form';
 
 interface FormInputContext {
   formInputs: [] | FormInputType[];

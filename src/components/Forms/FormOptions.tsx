@@ -7,11 +7,11 @@ import {
 } from 'react-hook-form';
 
 // component
-import EditFormButton from '../Buttons/EditFormButton';
+import EditFormButton from '@components/Buttons/EditFormButton';
 import EditFormInput from './EditForm/EditFormText';
 
 //type
-import { FormInputType } from '../../type/form';
+import { FormInputType } from '@type/form';
 
 type Props = {
   control: Control<FormInputType>;
@@ -20,12 +20,12 @@ type Props = {
 };
 export default function FormOptions({ control, register, errors }: Props) {
   const { fields, append, remove } = useFieldArray({
-    name: '_radioOptions',
+    name: '_options',
     control,
   });
-  console.log(errors);
+
   return (
-    <div className="flex flex-col items-start ">
+    <div className="flex flex-col items-start">
       <EditFormButton
         buttonColor="bg-red-500"
         handleClick={() =>
@@ -38,19 +38,18 @@ export default function FormOptions({ control, register, errors }: Props) {
       </EditFormButton>
 
       <div className="mt-4">
-        <p className="text-red-500 ">
-          {errors._radioOptions?.message || errors._radioOptions?.root?.message}
+        <p className="text-red-500 text-start">
+          {errors._options?.message || errors._options?.root?.message}
         </p>
         {fields.map((field, index) => {
           return (
-            <div className="flex  gap-1 " key={field.id}>
+            <div className="flex gap-1" key={field.id}>
               <EditFormInput
                 labelText={`Radio Option`}
                 error={
-                  errors?._radioOptions &&
-                  errors?._radioOptions[index]?.value?.message
+                  errors?._options && errors?._options[index]?.value?.message
                 }
-                {...register(`_radioOptions.${index}.value` as const)}
+                {...register(`_options.${index}.value` as const)}
               />
               <TrashIcon
                 className="w-6 text-red-500 self-end cursor-pointer "

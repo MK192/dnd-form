@@ -3,22 +3,25 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 //components
-import EditFormButton from '../../Buttons/EditFormButton';
-import EditFormInput from './EditFormText';
-import EditFormSelect from './EditFormSelect';
-import FormOptions from '../FormOptions';
+import EditFormButton from '@components/Buttons/EditFormButton';
+import EditFormInput from '@components/Forms/EditForm/EditFormText';
+import EditFormSelect from '@components/Forms/EditForm/EditFormSelect';
+import FormOptions from '@components/Forms/FormOptions';
 
 //context
-import { FormInputContext } from '../../../context/FormInputsContext';
+import { FormInputContext } from '@context/FormInputsContext';
 
 //schema
-import { inputsEditSchema } from '../../../schema/Inputs';
+import { editFormSchema } from '@schema/editFormSchema';
 
 //type
-import { FormInputType } from '../../../type/form';
+import { FormInputType } from '@type/form';
 
 // functions
-import { editFormInput } from '../../../functions/form';
+import { editFormInput } from '@functions/form';
+
+// enums
+import { EInputType } from '@enums/inputs';
 
 type Props = {
   editInput: FormInputType;
@@ -30,10 +33,11 @@ export default function EditForm({ editInput, setEditInput }: Props) {
     register,
     handleSubmit,
     control,
+    watch,
     reset,
     formState: { errors },
   } = useForm<FormInputType>({
-    resolver: zodResolver(inputsEditSchema),
+    resolver: zodResolver(editFormSchema),
     defaultValues: useMemo(() => {
       return editInput;
     }, [editInput]),
@@ -43,13 +47,16 @@ export default function EditForm({ editInput, setEditInput }: Props) {
     reset(editInput);
   }, [editInput, reset]);
 
+  const newType = watch('_type');
+
   const { formInputs, setFormInputs } = useContext(FormInputContext);
   const options = [
     { value: 'radio', name: 'Radio' },
     { value: 'text', name: 'Text' },
     { value: 'number', name: 'Number' },
+    { value: 'select', name: 'Select' },
   ];
-  console.log(errors);
+
   return (
     <form
       className="flex flex-col gap-7 "
@@ -75,7 +82,7 @@ export default function EditForm({ editInput, setEditInput }: Props) {
         error={errors._label?.message}
       />
 
-      {editInput._type === 'radio' ? (
+      {newType === EInputType.RADIO || newType === EInputType.SELECT ? (
         <FormOptions control={control} register={register} errors={errors} />
       ) : (
         <EditFormInput
@@ -84,8 +91,9 @@ export default function EditForm({ editInput, setEditInput }: Props) {
           error={errors._placeholder?.message}
         />
       )}
+
       <div className="flex mt-11  gap-16 justify-center">
-        <EditFormButton handleClick={() => setEditInput(null)}>
+        <EditFormButton type="button" handleClick={() => setEditInput(null)}>
           Cancel
         </EditFormButton>
         <EditFormButton type="submit">Confirm</EditFormButton>

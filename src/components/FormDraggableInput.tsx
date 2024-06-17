@@ -2,13 +2,20 @@ import { useDraggable } from '@dnd-kit/core';
 import { useContext } from 'react';
 
 // context
-import { FormInputContext } from '../context/FormInputsContext';
+import { FormInputContext } from '@context/FormInputsContext';
 
 // components
-import { Button } from './Buttons';
+import { Button } from '@components/Buttons';
+
+// enums
+import { EInputType } from '@enums/inputs';
 
 type Props = {
-  type: 'radio' | 'text' | 'number';
+  type:
+    | EInputType.RADIO
+    | EInputType.TEXT
+    | EInputType.NUMBER
+    | EInputType.SELECT;
   label: string;
   placeholder: string;
 };
@@ -19,7 +26,7 @@ export default function FormDraggableInput({
   placeholder,
 }: Props) {
   const { setFormInputs } = useContext(FormInputContext);
-  const addPlaceholder = type === 'radio' ? 'Option' : ' ';
+  const addPlaceholder = type === EInputType.RADIO ? 'Option' : ' ';
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: `draggable-${type}}`,
 
@@ -73,7 +80,3 @@ export default function FormDraggableInput({
 /* button use onMouseDown event because onClick don't work as
 expected inside div with setNodeRef
 */
-
-/* TODO adding new item on button click activates 2 times.
-Number of items stay same, but from performance view it is 
-not good */

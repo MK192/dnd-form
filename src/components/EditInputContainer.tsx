@@ -1,10 +1,10 @@
 import { Dispatch } from 'react';
 
 // components
-import { EditForm } from './Forms/EditForm';
+import { EditForm } from '@components/Forms/EditForm';
 
 // Type
-import { FormInputType } from '../type/form';
+import { FormInputType } from '@type/form';
 
 type Props = {
   editInput: FormInputType;

@@ -4,13 +4,16 @@ import { CSS } from '@dnd-kit/utilities';
 import { ArrowsUpDownIcon } from '@heroicons/react/16/solid';
 
 //components
-import { Button } from './Buttons';
+import { Button } from '@components/Buttons';
 
 // type
-import { FormInputType } from '../type/form';
+import { FormInputType } from '@type/form';
+
+// enums
+import { EInputType } from '@enums/inputs';
 
 // functions
-import { removeInput, swapInputs } from '../functions/form';
+import { removeInput, swapInputs } from '@functions/form';
 
 type Props = {
   dropedItem: FormInputType;
@@ -108,7 +111,7 @@ export default function DropedItem({
             min={0}
             max={maxInputValue}
             ref={ref}
-            type="number"
+            type={EInputType.NUMBER}
             onChange={(e) => setInputValue(Number(e.target.value))}
             className="border-[1px] border-gray-200 px-4"
           />

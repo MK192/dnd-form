@@ -1,5 +1,5 @@
 // components
-import GeneratedForm from './Forms/GeneratedForm/GeneratedForm';
+import { GeneratedForm } from '@components/Forms/GeneratedForm';
 
 export default function GeneratedFormContainer() {
   return (

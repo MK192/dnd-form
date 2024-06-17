@@ -1,12 +1,12 @@
 import { forwardRef } from 'react';
 
 //type
-import { OptionsType } from '../../../type/form';
+import { EditOptionsType } from '@type/form';
 
 type Props = {
   labelText: string;
   error: string | undefined;
-  options: OptionsType[];
+  options: EditOptionsType[];
 };
 const EditFormSelect = forwardRef<HTMLSelectElement, Props>(
   ({ labelText, error, options, ...other }: Props, ref) => {

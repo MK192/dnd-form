@@ -3,7 +3,7 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { DragEndEvent } from '@dnd-kit/core';
 
 //type
-import { FormInputType, GeneratedFormType } from '../type/form';
+import { FormInputType, GeneratedFormType } from '@type/form';
 
 /* remove input from droppable container 
 @ params 
@@ -51,24 +51,23 @@ export const handleDragEnd = (
   setFormInputs: Dispatch<React.SetStateAction<FormInputType[] | []>>
 ) => {
   const { active, over } = event;
+  let isItemAdded = false;
 
   if (active?.id === over?.id) {
     return;
   }
-  if (
-    event.active.data.current &&
-    event.active.data.current[0] &&
-    event.over?.id
-  ) {
-    addDraggInput(event.active.data.current[0], setFormInputs);
+  if (active.data.current && active.data.current[0] && over?.id) {
+    addDraggInput(active.data.current[0], setFormInputs);
+    isItemAdded = true;
   }
 
-  setFormInputs((inputs) => {
-    const oldIndex = inputs.findIndex((input) => input?.id === active?.id);
-    const newIndex = inputs.findIndex((input) => input?.id === over?.id);
+  if (isItemAdded || over?.id)
+    setFormInputs((inputs) => {
+      const oldIndex = inputs.findIndex((input) => input?.id === active?.id);
+      const newIndex = inputs.findIndex((input) => input?.id === over?.id);
 
-    return arrayMove(inputs, oldIndex, newIndex);
-  });
+      return arrayMove(inputs, oldIndex, newIndex);
+    });
 };
 
 /* function to change place of 2 dropped items. Function activate
@@ -101,7 +100,7 @@ export const editFormInput = (
   array: FormInputType[]
 ) => {
   const index = array.findIndex((element) => element.id === inputId);
-  const { _type, _name, _label, _placeholder, _radioOptions } = formValues;
+  const { _type, _name, _label, _placeholder, _options } = formValues;
 
   const editedElement = <FormInputType>{
     id: inputId,
@@ -110,13 +109,13 @@ export const editFormInput = (
     _label: _label,
     _placeholder: _placeholder,
   };
-  if (_radioOptions) editedElement._radioOptions = _radioOptions;
+  if (_options) editedElement._options = _options;
 
   array.splice(index, 1, editedElement);
   return array;
 };
 
-/* function activate alert message.If form is successfully submited than values
+/* function activate alert message. If form is successfully submited than values
 should be shown, if name is not provided then alert should be  'All fields should have names'
 @params formValues- values taken from form on submit
         formInputs - values for inputs like placeholder, name, label ...
