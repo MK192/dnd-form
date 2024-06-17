@@ -8,15 +8,17 @@ import { EInputType } from '@enums/inputs';
 
 type Props = {
   error?: string | undefined;
-  _radioOptions: RadioType[] | undefined;
+  _label: string | undefined;
+  _options: RadioType[] | undefined;
 };
 
 const GeneratedFormRadio = forwardRef<HTMLInputElement, Props>(
-  ({ error, _radioOptions, ...other }: Props, ref) => {
+  ({ error, _label, _options, ...other }: Props, ref) => {
     return (
       <fieldset className="flex flex-col gap-1 items-start w-full">
+        {_label ? <label>{_label}</label> : null}
         {error ? <span className="text-red-500">{error}</span> : null}
-        {_radioOptions?.map((radio) => (
+        {_options?.map((radio) => (
           <div key={radio.value} className="flex items-center gap-1">
             <input
               type={EInputType.RADIO}

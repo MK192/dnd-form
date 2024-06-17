@@ -11,7 +11,11 @@ import { Button } from '@components/Buttons';
 import { EInputType } from '@enums/inputs';
 
 type Props = {
-  type: EInputType.RADIO | EInputType.TEXT | EInputType.NUMBER;
+  type:
+    | EInputType.RADIO
+    | EInputType.TEXT
+    | EInputType.NUMBER
+    | EInputType.SELECT;
   label: string;
   placeholder: string;
 };
@@ -76,7 +80,3 @@ export default function FormDraggableInput({
 /* button use onMouseDown event because onClick don't work as
 expected inside div with setNodeRef
 */
-
-/* TODO adding new item on button click activates 2 times.
-Number of items stay same, but from performance view it is 
-not good */

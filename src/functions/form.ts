@@ -100,7 +100,7 @@ export const editFormInput = (
   array: FormInputType[]
 ) => {
   const index = array.findIndex((element) => element.id === inputId);
-  const { _type, _name, _label, _placeholder, _radioOptions } = formValues;
+  const { _type, _name, _label, _placeholder, _options } = formValues;
 
   const editedElement = <FormInputType>{
     id: inputId,
@@ -109,13 +109,13 @@ export const editFormInput = (
     _label: _label,
     _placeholder: _placeholder,
   };
-  if (_radioOptions) editedElement._radioOptions = _radioOptions;
+  if (_options) editedElement._options = _options;
 
   array.splice(index, 1, editedElement);
   return array;
 };
 
-/* function activate alert message.If form is successfully submited than values
+/* function activate alert message. If form is successfully submited than values
 should be shown, if name is not provided then alert should be  'All fields should have names'
 @params formValues- values taken from form on submit
         formInputs - values for inputs like placeholder, name, label ...

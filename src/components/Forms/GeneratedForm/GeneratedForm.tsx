@@ -57,7 +57,7 @@ export default function GeneratedForm() {
           _type={formInputs[index]?._type}
           _label={formInputs[index]?._label}
           _placeholder={formInputs[index]?._placeholder}
-          _radioOptions={formInputs[index]?._radioOptions}
+          _options={formInputs[index]?._options}
           index={index}
           register={register}
           error={errors.fields && errors.fields[index]?.value?.message}

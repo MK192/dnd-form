@@ -24,6 +24,11 @@ export default function InputListContainer() {
           label="radio"
           placeholder="Option"
         />
+        <FormDraggableInput
+          type={EInputType.SELECT}
+          label="select"
+          placeholder="Select"
+        />
       </div>
     </section>
   );
