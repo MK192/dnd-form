@@ -12,6 +12,7 @@ import DropContainer from '@components/DropContainer';
 import InputListContainer from '@components/InputListContainer';
 import EditInputContainer from '@components/EditInputContainer';
 import GeneratedFormContainer from '@components/GeneratedFormContainer';
+import GeneratedFormResponsive from '@components/Forms/GeneratedForm/GeneratedFormResponsive';
 
 // context
 import { FormInputContext } from '@context/FormInputsContext';
@@ -19,12 +20,17 @@ import { FormInputContext } from '@context/FormInputsContext';
 // functions
 import { handleDragEnd } from '@functions/form';
 
+//hooks
+import useIsLargeScreen from 'hooks/useIsLargeScreen';
+
 // type
 import { FormInputType } from '@type/form';
 
 export default function MainContainer() {
   const [editInput, setEditInput] = useState<FormInputType | null>(null);
+  const [showForm, setShowForm] = useState<boolean>(false);
   const { setFormInputs } = useContext(FormInputContext);
+  const isLargeScreen = useIsLargeScreen();
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
       distance: 10,
@@ -38,7 +44,7 @@ export default function MainContainer() {
   const sensors = useSensors(touchSensor, mouseSensor);
 
   return (
-    <main className="bg-white h-full flex">
+    <main className="flex bg-container h-full lg:p-7 ">
       <DndContext
         sensors={sensors}
         onDragEnd={(e) => handleDragEnd(e, setFormInputs)}
@@ -51,8 +57,16 @@ export default function MainContainer() {
         ) : (
           <InputListContainer />
         )}
-        <DropContainer setEditInput={setEditInput} />
+
+        {!showForm || isLargeScreen ? (
+          <DropContainer
+            setEditInput={setEditInput}
+            setShowForm={setShowForm}
+          />
+        ) : null}
       </DndContext>
+
+      {showForm ? <GeneratedFormResponsive setShowForm={setShowForm} /> : null}
       <GeneratedFormContainer />
     </main>
   );

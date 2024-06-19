@@ -26,7 +26,8 @@ export default function FormDraggableInput({
   placeholder,
 }: Props) {
   const { setFormInputs } = useContext(FormInputContext);
-  const addPlaceholder = type === EInputType.RADIO ? 'Option' : ' ';
+  const addPlaceholder =
+    type === EInputType.RADIO || type === EInputType.SELECT ? 'Option' : ' ';
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: `draggable-${type}}`,
 
@@ -42,7 +43,7 @@ export default function FormDraggableInput({
   return (
     <div className="relative z-50 ">
       <div
-        className="shadow-[0px_1px_3px_rgba(0,0,0,0.3)] w-[150px] flex flex-col cursor-grabbing"
+        className="shadow-[0px_1px_3px_rgba(0,0,0,0.3)] w-24 sm:w-[150px] flex flex-col cursor-grabbing"
         ref={setNodeRef}
         style={style}
         {...listeners}
@@ -76,7 +77,3 @@ export default function FormDraggableInput({
     </div>
   );
 }
-
-/* button use onMouseDown event because onClick don't work as
-expected inside div with setNodeRef
-*/

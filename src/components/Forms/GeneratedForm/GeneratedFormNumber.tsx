@@ -13,9 +13,7 @@ const GeneratedFormNumber = forwardRef<HTMLInputElement, Props>(
   ({ _label, error, _placeholder, ...other }: Props, ref) => {
     return (
       <div className="flex flex-col items-start w-full">
-        <label>
-          {_label} <span className="text-red-500">{error ? error : null}</span>
-        </label>
+        <label>{_label}</label>
         <input
           type={EInputType.NUMBER}
           className="w-full rounded-sm border-[1px] border-gray-300 px-2"
@@ -23,6 +21,7 @@ const GeneratedFormNumber = forwardRef<HTMLInputElement, Props>(
           {...other}
           placeholder={_placeholder}
         />
+        <p className="text-red-500">{error ? error : null}</p>
       </div>
     );
   }

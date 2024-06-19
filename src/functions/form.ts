@@ -86,7 +86,6 @@ export const swapInputs = (
     array[inputIndex] = array[swapInputIndex];
     array[swapInputIndex] = prom;
   }
-
   return array;
 };
 
