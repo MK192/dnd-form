@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 //type
-import { RadioType } from '@type/form';
+import { OptionsType } from '@type/form';
 
 // enum
 import { EInputType } from '@enums/inputs';
@@ -9,7 +9,7 @@ import { EInputType } from '@enums/inputs';
 type Props = {
   error?: string | undefined;
   _label: string | undefined;
-  _options: RadioType[] | undefined;
+  _options: OptionsType[] | undefined;
 };
 
 const GeneratedFormRadio = forwardRef<HTMLInputElement, Props>(
@@ -17,7 +17,7 @@ const GeneratedFormRadio = forwardRef<HTMLInputElement, Props>(
     return (
       <fieldset className="flex flex-col gap-1 items-start w-full">
         {_label ? <label>{_label}</label> : null}
-        {error ? <span className="text-red-500">{error}</span> : null}
+
         {_options?.map((radio) => (
           <div key={radio.value} className="flex items-center gap-1">
             <input
@@ -30,6 +30,7 @@ const GeneratedFormRadio = forwardRef<HTMLInputElement, Props>(
             <label>{radio.value}</label>
           </div>
         ))}
+        {error ? <p className="text-red-500">{error}</p> : null}
       </fieldset>
     );
   }

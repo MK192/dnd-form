@@ -13,8 +13,9 @@ import { FormInputType } from '@type/form';
 
 type Props = {
   setEditInput: Dispatch<React.SetStateAction<FormInputType | null>>;
+  setShowForm: Dispatch<React.SetStateAction<boolean>>;
 };
-export default function DropContainer({ setEditInput }: Props) {
+export default function DropContainer({ setEditInput, setShowForm }: Props) {
   const { formInputs, setFormInputs } = useContext(FormInputContext);
   const { setNodeRef } = useDroppable({
     id: 'droppable',
@@ -26,7 +27,7 @@ export default function DropContainer({ setEditInput }: Props) {
 
   return (
     <section
-      className="bg-slate-100 w-[40%] border-2 border-blue-100 p-4 z-20"
+      className="relative w-7/12 lg:w-[40%] bg-slate-100  border-2 border-blue-100 p-4 z-20"
       ref={setNodeRef}
     >
       <h2 className="mb-9">Drop Container</h2>
@@ -42,6 +43,14 @@ export default function DropContainer({ setEditInput }: Props) {
           />
         ))}
       </SortableContext>
+
+      <button
+        type="button"
+        className="absolute top-2 right-2 border-2 w-15 p-2 border-blue-500 rounded-lg lg:hidden bg-white"
+        onClick={() => setShowForm(true)}
+      >
+        Show Form
+      </button>
     </section>
   );
 }

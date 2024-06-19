@@ -4,9 +4,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 //components
 import EditFormButton from '@components/Buttons/EditFormButton';
-import EditFormInput from '@components/Forms/EditForm/EditFormText';
+import EditFormText from '@components/Forms/EditForm/EditFormText';
 import EditFormSelect from '@components/Forms/EditForm/EditFormSelect';
-import FormOptions from '@components/Forms/FormOptions';
+import FormOptions from '@components/Forms/EditForm/FormOptions';
 
 //context
 import { FormInputContext } from '@context/FormInputsContext';
@@ -59,7 +59,7 @@ export default function EditForm({ editInput, setEditInput }: Props) {
 
   return (
     <form
-      className="flex flex-col gap-7 "
+      className="flex flex-col gap-7 w-full"
       onSubmit={handleSubmit((formValues) => {
         console.log(formValues);
         setFormInputs([...editFormInput(editInput.id, formValues, formInputs)]);
@@ -71,12 +71,12 @@ export default function EditForm({ editInput, setEditInput }: Props) {
         error={errors._type?.message}
         options={options}
       />
-      <EditFormInput
+      <EditFormText
         labelText="Name (required)"
         {...register('_name')}
         error={errors._name?.message}
       />
-      <EditFormInput
+      <EditFormText
         labelText="Label"
         {...register('_label')}
         error={errors._label?.message}
@@ -85,18 +85,20 @@ export default function EditForm({ editInput, setEditInput }: Props) {
       {newType === EInputType.RADIO || newType === EInputType.SELECT ? (
         <FormOptions control={control} register={register} errors={errors} />
       ) : (
-        <EditFormInput
+        <EditFormText
           labelText="Placeholder"
           {...register('_placeholder')}
           error={errors._placeholder?.message}
         />
       )}
 
-      <div className="flex mt-11  gap-16 justify-center">
+      <div className="flex flex-col-reverse gap-3 mt-3 sm:mt-11  sm:flex-row sm:gap-8 justify-center items-center">
         <EditFormButton type="button" handleClick={() => setEditInput(null)}>
           Cancel
         </EditFormButton>
-        <EditFormButton type="submit">Confirm</EditFormButton>
+        <EditFormButton type="submit" buttonColor="bg-blue-500">
+          Confirm
+        </EditFormButton>
       </div>
     </form>
   );

@@ -36,7 +36,7 @@ export default function DropedItem({
       transition: { duration: 450, easing: 'ease-in-out' },
     });
   const [showInput, setShowInput] = useState(false);
-  const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState<number | null>(null);
   const ref = useRef<HTMLInputElement | null>(null);
   const checkOutsideClick = (event: MouseEvent) => {
     if (ref.current && !ref.current.contains(event.target as Node)) {
@@ -51,7 +51,7 @@ export default function DropedItem({
   }, []);
 
   useEffect(() => {
-    if (!showInput) {
+    if (!showInput && typeof inputValue === 'number') {
       const newArray = [...swapInputs(index, inputValue, formInputs)];
       setFormInputs(newArray);
     }
@@ -65,9 +65,9 @@ export default function DropedItem({
   const maxInputValue = formInputs.length - 1;
 
   return (
-    <div className="relative ">
+    <div className="relative">
       <div
-        className="bg-white rounded-sm  mb-4 cursor-grabbing border-[1px] border-gray-300"
+        className="bg-white rounded-sm mb-4 cursor-grabbing border-[1px] border-gray-300"
         key={index}
         ref={setNodeRef}
         {...attributes}
@@ -88,12 +88,12 @@ export default function DropedItem({
               <p className=" text-red-500 border-[1px] border-red-500 rounded-[50%] w-5 text-xs">
                 !
               </p>
-              <p>Name is Required</p>
+              <p className="hidden sm:block">Name is Required</p>
             </div>
           )}
           <p>{dropedItem?._label}</p>
           <div className="border-[1px] w-full h-[40px] border-gray-300 text-left p-2">
-            <p className="text-gray-400">{dropedItem?._placeholder}</p>
+            <p className="text-gray-400 truncate">{dropedItem?._placeholder}</p>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ export default function DropedItem({
       <div className="absolute top-0 right-0 flex ">
         {showInput ? (
           <input
-            value={inputValue}
+            value={inputValue ?? 0}
             min={0}
             max={maxInputValue}
             ref={ref}
@@ -116,7 +116,12 @@ export default function DropedItem({
             className="border-[1px] border-gray-200 px-4"
           />
         ) : (
-          <Button handleClick={() => setShowInput(true)}>
+          <Button
+            handleClick={() => {
+              setShowInput(true);
+              setInputValue(0);
+            }}
+          >
             <ArrowsUpDownIcon className="w-5 text-gray-500" />
           </Button>
         )}
