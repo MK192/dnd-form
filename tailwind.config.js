@@ -4,11 +4,13 @@ export default {
   theme: {
     extend: {
       screens: {
+        mobile: '420px',
+
         sm: '640px',
 
         md: '768px',
 
-        lg: '1024px',
+        lg: '960px',
 
         xl: '1280px',
 

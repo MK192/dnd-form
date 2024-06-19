@@ -11,11 +11,9 @@ type Props = {
 
 const GeneratedFormSelect = forwardRef<HTMLSelectElement, Props>(
   ({ error, _label, _options, ...other }: Props, ref) => {
-    console.log(_options);
     return (
       <fieldset className="flex flex-col gap-1 items-start w-full">
         {_label ? <label>{_label}</label> : null}
-        {error ? <span className="text-red-500">{error}</span> : null}
         <div className="flex items-center gap-1 w-full">
           <select
             ref={ref}
@@ -29,6 +27,7 @@ const GeneratedFormSelect = forwardRef<HTMLSelectElement, Props>(
             ))}
           </select>
         </div>
+        {error ? <p className="text-red-500">{error}</p> : null}
       </fieldset>
     );
   }

@@ -8,7 +8,7 @@ import {
 
 // component
 import EditFormButton from '@components/Buttons/EditFormButton';
-import EditFormInput from './EditForm/EditFormText';
+import EditFormInput from './EditFormText';
 
 //type
 import { FormInputType } from '@type/form';
@@ -45,7 +45,7 @@ export default function FormOptions({ control, register, errors }: Props) {
           return (
             <div className="flex gap-1" key={field.id}>
               <EditFormInput
-                labelText={`Radio Option`}
+                labelText={`Option`}
                 error={
                   errors?._options && errors?._options[index]?.value?.message
                 }
